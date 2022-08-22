@@ -1,12 +1,12 @@
 package com.simple.article.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
 @NoArgsConstructor
 @Table(name = "TB_ARTICLE")
 public class Article {
@@ -23,4 +23,8 @@ public class Article {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author")
     private Member member;
+
+    public void setAuthor(Member member){
+        this.member = member;
+    }
 }

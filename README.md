@@ -10,3 +10,11 @@
 - test case
 
 ## Extend
+- docker
+- docker-compose
+
+
+## setup
+```
+docker-compose up
+```

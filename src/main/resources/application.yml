@@ -1,8 +1,23 @@
-Spring:
+spring:
   application:
     name: simple-article-api
-  profiles:
-    active: test
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:4445/simple_article_db
+    username: root
+    password: '0000'
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+Loggin:
+  level:
+    org.hibernate.SQL: debug
 
 jwt:
   header: Authorization
