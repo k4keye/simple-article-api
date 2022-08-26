@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  nginx:
-    container_name: simple-article-nginx # 아래의 이미지로 띄울 컨테이너의 이름 지정
-    image: nginx:latest # 가지고있는 이미지 명
-    volumes:
-      - ./out/artifacts/nft_admin_main_jar:/share
-    ports:
-      - 80:80
+#  nginx:
+#    container_name: simple-article-nginx # 아래의 이미지로 띄울 컨테이너의 이름 지정
+#    image: nginx:latest # 가지고있는 이미지 명
+#    volumes:
+#      - ./out/artifacts/simple-article-api_jar:/share
+#    ports:
+#      - 80:80
 
   mariadb:
     container_name: simple-article-mariadb

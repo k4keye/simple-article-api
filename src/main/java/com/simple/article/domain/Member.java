@@ -2,6 +2,7 @@ package com.simple.article.domain;
 
 
 import com.simple.article.domain.base.BaseStateEntity;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TB_MEMBER")
 public class Member extends BaseStateEntity {
 
@@ -28,8 +29,18 @@ public class Member extends BaseStateEntity {
     @Column(name = "nick_name", unique = true)
     private String nickName;
 
+    @Column(name = "email")
+    private String email;
+
     @OneToMany(mappedBy = "member")
     private List<Article> articles = new ArrayList<>();
+
+    public Member(String loginID, String loginPWD, String nickName, String email) {
+        this.loginID = loginID;
+        this.loginPWD = loginPWD;
+        this.nickName = nickName;
+        this.email = email;
+    }
 
     public void newArticles(Article article){
         if(article != null){

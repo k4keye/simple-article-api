@@ -33,6 +33,9 @@ dependencies {
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
     //h2
     runtimeOnly 'com.h2database:h2'
+
+    //validation
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
 }
 
 tasks.named('test') {
