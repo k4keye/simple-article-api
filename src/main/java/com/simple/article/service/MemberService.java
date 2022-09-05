@@ -28,9 +28,9 @@ public class MemberService {
         return memberRepository.existsByNickName(nickName);
     }
 
-    public void saveMember(String id, String pwd, String nickName, String email ){
+    public Member saveMember(String id, String pwd, String nickName, String email ){
         Member member = new Member(id, pwd, nickName, email);
-        memberRepository.save(member);
+        return memberRepository.save(member);
     }
     public void update(){
 

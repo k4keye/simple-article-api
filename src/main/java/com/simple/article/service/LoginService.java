@@ -21,7 +21,7 @@ public class LoginService {
 
         return true;
     }
-    public void join(String id, String pwd,String nickName, String email){
+    public Member join(String id, String pwd,String nickName, String email){
 
         if(memberService.existLoginId(id))
             throw new IllegalStateException("exist member login id");
@@ -30,7 +30,7 @@ public class LoginService {
             throw new IllegalStateException("exist member nickName");
 
 
-        memberService.saveMember(id,pwd,nickName,email);
+        return memberService.saveMember(id,pwd,nickName,email);
 
         //패스워드 해시
        // String randomNickName = RandomUtils.getString(true, 20);
