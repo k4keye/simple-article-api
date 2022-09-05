@@ -1,0 +1,42 @@
+package com.simple.article.config;
+
+import com.simple.article.domain.Member;
+import com.simple.article.domain.repository.MemberRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component("userDetailsService")
+public class CustomUserDetailsService implements UserDetailsService {
+    private final MemberRepository memberRepository;
+
+    public CustomUserDetailsService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(final String loginId) {
+        return memberRepository.findOneWithAuthoritiesByLoginID(loginId)
+                .map(member -> createMember(member))
+                .orElseThrow(() -> new UsernameNotFoundException(loginId + " 에 해당하는 member 이 없다"));
+    }
+
+    private User createMember(Member member) {
+
+        List<GrantedAuthority> grantedAuthorities = member.getAuthorities().stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
+                .collect(Collectors.toList());
+        return new User(member.getLoginID(),
+                member.getLoginPWD(),
+                grantedAuthorities);
+    }
+}
