@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "authority")
+@Table(name = "TB_AUTHORITY")
 @NoArgsConstructor
 @Getter
 public class Authority {

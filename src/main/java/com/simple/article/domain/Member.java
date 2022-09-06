@@ -5,15 +5,18 @@ import com.simple.article.domain.base.BaseStateEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 
 @Entity
 @Getter
+@ToString(exclude = {"articles"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TB_MEMBER")
 public class Member extends BaseStateEntity {
@@ -52,10 +55,10 @@ public class Member extends BaseStateEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "user_authority",
-            joinColumns = {@JoinColumn(name = "loginID", referencedColumnName = "loginID")},
+            name = "tb_member_authority",
+            joinColumns = {@JoinColumn(name = "login_id", referencedColumnName = "login_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")}
     )
-    private Set<Authority> authorities;
+    private Set<Authority> authorities = new HashSet<>();
 
 }

@@ -37,13 +37,23 @@ class CreateMemberTest {
 
         Member saveMember = loginService.join(loginId, loginPwd, nickName, email);
         Assertions.assertNotNull(saveMember);
-        Assertions.assertEquals(loginId, saveMember.getLoginID());
 
+
+        System.out.println("saveMember = " + saveMember);
+        Assertions.assertEquals(loginId, saveMember.getLoginID());
         Member findMember = memberRepository.findById(saveMember.getId())
-                                                .orElse(Assertions.fail());
+                                                .orElseGet(() -> Assertions.fail());
 
         Assertions.assertEquals(loginId, findMember.getLoginID());
-
     }
 
+    @Test
+    @DisplayName("[성공] 로그인")
+    public void loginSuccess(){
+
+        joinSuccess();
+
+        boolean login = loginService.login(loginId, loginPwd);
+        assertTrue(login);
+    }
 }
