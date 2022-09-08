@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: simple-article-api
+  sql:
+    init:
+      data-locations: classpath:data.sql # data.sql 위치
+      mode: always # data.sql 허용
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:4445/simple_article_db
@@ -17,6 +21,7 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+    defer-datasource-initialization: true # data.sql 허용
 
 Loggin:
   level:

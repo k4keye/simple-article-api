@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,6 +56,8 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests() //HttpServletRequest 를 사용하는 요청에 접근제한 활성화
+                .antMatchers("/swagger*/**").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/hello").permitAll() //인증없이 허용
                 .antMatchers("/login").permitAll() //인증없이 허용
                 .antMatchers("/login_test").permitAll() //인증없이 허용

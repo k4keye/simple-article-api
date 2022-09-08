@@ -1,6 +1,7 @@
 package com.simple.article.controller;
 
 import com.simple.article.service.ArticleService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
     private final ArticleService articleService;
 
+    @ApiOperation(value="test")
     @PostMapping
     public ResponseEntity saveArticle(){
         articleService.saveNewArticle();

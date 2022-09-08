@@ -53,7 +53,11 @@ class CreateMemberTest {
 
         joinSuccess();
 
-        boolean login = loginService.login(loginId, loginPwd);
-        assertTrue(login);
+        String token= loginService.login(loginId, loginPwd);
+
+        System.out.println("token = " + token);
+
+        assertNotNull(token);
+
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component("userDetailsService")
@@ -25,9 +26,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String loginId) {
-        return memberRepository.findOneWithAuthoritiesByLoginID(loginId)
+
+        User user = memberRepository.findOneWithAuthoritiesByLoginID(loginId)
                 .map(member -> createMember(member))
                 .orElseThrow(() -> new UsernameNotFoundException(loginId + " 에 해당하는 member 이 없다"));
+
+        System.out.println("loadUserByUsername user = " + user.getUsername());
+
+        return user;
     }
 
     private User createMember(Member member) {
@@ -35,8 +41,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = member.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .collect(Collectors.toList());
-        return new User(member.getLoginID(),
+
+        User user = new User(member.getLoginID(),
                 member.getLoginPWD(),
                 grantedAuthorities);
+
+        return user;
     }
 }

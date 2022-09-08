@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,10 +17,10 @@ import java.util.Set;
 
 @Entity
 @Getter
-@ToString(exclude = {"articles"})
+@ToString(exclude = {"articles","authorities"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TB_MEMBER")
-public class Member extends BaseStateEntity {
+public class Member extends BaseStateEntity implements Serializable {
 
     @Id @GeneratedValue
     private Long id;
@@ -44,6 +45,10 @@ public class Member extends BaseStateEntity {
         this.loginPWD = loginPWD;
         this.nickName = nickName;
         this.email = email;
+
+        Authority authority = new Authority();
+        authority.setAuthorityName("ROLE_USER");
+        this.authorities.add(authority);
     }
 
     public void newArticles(Article article){
@@ -60,5 +65,6 @@ public class Member extends BaseStateEntity {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")}
     )
     private Set<Authority> authorities = new HashSet<>();
+
 
 }

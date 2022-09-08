@@ -1,0 +1,8 @@
+-- INSERT INTO TB_MEMBER (LOGIN_ID, LOGIN_PWD, NICK_NAME,EMAIL)  VALUES ('admin', '$2a$10$1PdZ.5oP5vj2oSJNaBWlGO3XAo38.sXfgup/LVpasxzzNmBrd8dly', 'adminNickName', 'admin@admin.com');
+-- INSERT INTO TB_MEMBER (LOGIN_ID, LOGIN_PWD, NICK_NAME,EMAIL)  VALUES ('user', '$2a$10$x5ItQ0I/FMmWxBE5tLDh3ex.0w.O.YjfDvMS/T349nl.Hqhy84gL', 'userNickName', 'user@user.com');
+--
+INSERT INTO tb_authority (AUTHORITY_NAME) values ('ROLE_USER');
+INSERT INTO tb_authority (AUTHORITY_NAME) values ('ROLE_ADMIN');
+--
+-- INSERT INTO TB_MEMBER_AUTHORITY (LOGIN_ID, AUTHORITY_NAME) values ('admin', 'ROLE_ADMIN');
+-- INSERT INTO TB_MEMBER_AUTHORITY (LOGIN_ID, AUTHORITY_NAME) values ('user', 'ROLE_USER');
