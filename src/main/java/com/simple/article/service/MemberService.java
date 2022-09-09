@@ -1,5 +1,6 @@
 package com.simple.article.service;
 
+import com.simple.article.common.SecurityUtil;
 import com.simple.article.domain.Member;
 import com.simple.article.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,9 @@ public class MemberService {
 
     public void delete(){
 
+    }
+
+    public Member getAuthMember(){
+        return SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByLoginID).orElseGet(()->null);
     }
 }
