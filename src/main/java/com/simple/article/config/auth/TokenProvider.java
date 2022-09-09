@@ -1,4 +1,4 @@
-package com.simple.article.config;
+package com.simple.article.config.auth;
 
 import io.jsonwebtoken.*;
 

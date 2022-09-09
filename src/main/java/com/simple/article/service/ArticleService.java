@@ -10,7 +10,7 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    public void saveNewArticle(){
+    public void saveArticle(String title, String context){
 
     }
 

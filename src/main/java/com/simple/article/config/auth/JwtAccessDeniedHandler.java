@@ -1,4 +1,4 @@
-package com.simple.article.config;
+package com.simple.article.config.auth;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

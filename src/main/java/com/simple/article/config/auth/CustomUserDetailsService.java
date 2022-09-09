@@ -1,4 +1,4 @@
-package com.simple.article.config;
+package com.simple.article.config.auth;
 
 import com.simple.article.domain.Member;
 import com.simple.article.domain.repository.MemberRepository;

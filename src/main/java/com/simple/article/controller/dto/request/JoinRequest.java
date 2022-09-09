@@ -1,4 +1,4 @@
-package com.simple.article.controller.dto;
+package com.simple.article.controller.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

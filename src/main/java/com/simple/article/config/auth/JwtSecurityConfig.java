@@ -1,4 +1,4 @@
-package com.simple.article.config;
+package com.simple.article.config.auth;
 
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

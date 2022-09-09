@@ -1,14 +1,12 @@
 package com.simple.article.service;
 
-import com.simple.article.config.TokenProvider;
+import com.simple.article.config.auth.TokenProvider;
 import com.simple.article.domain.Member;
-import com.simple.article.utils.RandomUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
