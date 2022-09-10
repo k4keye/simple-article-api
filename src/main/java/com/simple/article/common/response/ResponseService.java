@@ -61,6 +61,11 @@ public class ResponseService {
         setSuccessResult(result);
         return result;
     }
+    public <T> ListResult<T> getListResult(List<T> list,List<Links> links) {
+        ListResult<T> listResult = getListResult(list);
+        listResult.setLinks(links);
+        return listResult;
+    }
 
     public <T> ListResult<T> getListResult(List<T> list, ResultCode resultCode) {
         ListResult<T> result = new ListResult<>();

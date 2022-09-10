@@ -4,8 +4,13 @@ import com.simple.article.common.SecurityUtil;
 import com.simple.article.domain.Member;
 import com.simple.article.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +23,10 @@ public class MemberService {
         return memberRepository
                 .findByLoginID(id)
                 .orElseThrow(() -> new IllegalStateException("not exist member"));
+    }
+    public Page<Member> fetchAllMember(Pageable pageable){
+
+        return memberRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
@@ -33,15 +42,18 @@ public class MemberService {
         Member member = new Member(id, pwd, nickName, email);
         return memberRepository.save(member);
     }
+
     public void update(){
 
     }
 
     public void delete(){
-
+        Member authMember = getAuthMember();
+        authMember.inActive();
     }
 
     public Member getAuthMember(){
-        return SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByLoginID).orElseGet(()->null);
+        return SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByLoginID)
+                .orElseThrow(()->new IllegalStateException("not exist member"));
     }
 }

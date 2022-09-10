@@ -37,8 +37,6 @@ public class ArticleController {
     }) //swagger 에 jwt 추가 하도록 강제
     public ResponseEntity saveArticle(@Valid @RequestBody ArticleRequest articleRequest){
 
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         articleService.saveArticle(articleRequest.getTitle(), articleRequest.getContext());
         return ResponseEntity.status(HttpStatus.CREATED).body("hello world");
     }

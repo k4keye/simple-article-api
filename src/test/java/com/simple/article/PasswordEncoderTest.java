@@ -22,7 +22,7 @@ public class PasswordEncoderTest {
     @DisplayName("[성공] 패스워드 암복호")
     void enDeCoder(){
 
-        String pwd = "pwdpwd123123!@#";
+        String pwd = "user";
         String encode = passwordEncoder.encode(pwd);
         System.out.println("encode = " + encode);
         Assertions.assertTrue(passwordEncoder.matches(pwd,encode));

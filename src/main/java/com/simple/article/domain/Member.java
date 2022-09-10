@@ -22,7 +22,7 @@ import java.util.Set;
 @Table(name = "TB_MEMBER")
 public class Member extends BaseStateEntity implements Serializable {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "login_id", unique = true)
@@ -45,6 +45,7 @@ public class Member extends BaseStateEntity implements Serializable {
         this.loginPWD = loginPWD;
         this.nickName = nickName;
         this.email = email;
+        this.active();
 
         Authority authority = new Authority();
         authority.setAuthorityName("ROLE_USER");
