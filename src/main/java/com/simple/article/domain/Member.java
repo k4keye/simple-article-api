@@ -9,10 +9,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -47,8 +44,7 @@ public class Member extends BaseStateEntity implements Serializable {
         this.email = email;
         this.active();
 
-        Authority authority = new Authority();
-        authority.setAuthorityName("ROLE_USER");
+        Authority authority = Authority.userAuth();
         this.authorities.add(authority);
     }
 
@@ -67,5 +63,12 @@ public class Member extends BaseStateEntity implements Serializable {
     )
     private Set<Authority> authorities = new HashSet<>();
 
+    public boolean isAdmin(){
 
+        Optional<Authority> first = this.authorities.stream()
+                .filter(Authority::isAdmin)
+                .findFirst();
+
+        return first.isPresent();
+    }
 }

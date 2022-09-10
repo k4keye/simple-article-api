@@ -37,7 +37,7 @@ public class LoginController {
         map.put("id", id);
         map.put("token", "Bearer "+token);
 
-        SingleResult<HashMap<String, String>> responseBody = responseService.getSingleResult(map);
+        SingleResult<HashMap<String, String>> responseBody = responseService.getResult(map);
 
         List<Links> links = new ArrayList<>();
         links.add(new Links("article","/article"));
@@ -54,7 +54,7 @@ public class LoginController {
         List<Links> links = new ArrayList<>();
         links.add(new Links("login","/login"));
 
-        SingleResult<MemberDto> responseBody = responseService.getSingleResult(memberDto,links);
+        SingleResult<MemberDto> responseBody = responseService.getResult(memberDto,links);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }

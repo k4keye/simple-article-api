@@ -44,4 +44,8 @@ public class BaseStateEntity extends BaseTimeEntity{
     public void active(){
         this.state =  STATE.ACTIVE.getCode();
     }
+
+    public boolean isActive(){
+        return this.state == STATE.ACTIVE.getCode();
+    }
 }

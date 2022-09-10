@@ -33,41 +33,42 @@ public class ResponseService {
     }
 
     // 단일건 결과를 처리하는 메소드
-    public <T> SingleResult<T> getSingleResult(T data) {
+    public <T> SingleResult<T> getResult(T data) {
         SingleResult<T> result = new SingleResult<>();
         result.setData(data);
         setSuccessResult(result);
         return result;
     }
 
-    public <T> SingleResult<T> getSingleResult(T data, List<Links> links) {
-        SingleResult<T> singleResult = getSingleResult(data);
+    public <T> SingleResult<T> getResult(T data, List<Links> links) {
+        SingleResult<T> singleResult = getResult(data);
         singleResult.setLinks(links);
         return singleResult;
     }
 
 
-    public <T> SingleResult<T> getSingleResult(T data, ResultCode resultCode) {
+    public <T> SingleResult<T> getResult(T data, ResultCode resultCode) {
         SingleResult<T> result = new SingleResult<>();
         result.setData(data);
         setSuccessResult(result, resultCode);
         return result;
     }
 
+
     // 다중건 결과를 처리하는 메소드
-    public <T> ListResult<T> getListResult(List<T> list) {
+    public <T> ListResult<T> getResult(List<T> list) {
         ListResult<T> result = new ListResult<>();
         result.setList(list);
         setSuccessResult(result);
         return result;
     }
-    public <T> ListResult<T> getListResult(List<T> list,List<Links> links) {
-        ListResult<T> listResult = getListResult(list);
+    public <T> ListResult<T> getResult(List<T> list,List<Links> links) {
+        ListResult<T> listResult = getResult(list);
         listResult.setLinks(links);
         return listResult;
     }
 
-    public <T> ListResult<T> getListResult(List<T> list, ResultCode resultCode) {
+    public <T> ListResult<T> getResult(List<T> list, ResultCode resultCode) {
         ListResult<T> result = new ListResult<>();
         result.setList(list);
         setSuccessResult(result, resultCode);
@@ -75,14 +76,14 @@ public class ResponseService {
     }
 
     // 다중건 결과를 처리하는 메소드
-    public <T> SetResult<T> getSetResult(Set<T> set) {
+    public <T> SetResult<T> getResult(Set<T> set) {
         SetResult<T> result = new SetResult<>();
         result.setSet(set);
         setSuccessResult(result);
         return result;
     }
 
-    public <T> SetResult<T> getSetResult(Set<T> set, ResultCode resultCode) {
+    public <T> SetResult<T> getResult(Set<T> set, ResultCode resultCode) {
         SetResult<T> result = new SetResult<>();
         result.setSet(set);
         setSuccessResult(result, resultCode);
