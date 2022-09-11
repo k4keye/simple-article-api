@@ -5,6 +5,7 @@ import com.simple.article.common.response.enums.ResultCode;
 import com.simple.article.common.response.result.*;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -54,41 +55,52 @@ public class ResponseService {
         return result;
     }
 
-
-    // 다중건 결과를 처리하는 메소드
-    public <T> ListResult<T> getResult(List<T> list) {
-        ListResult<T> result = new ListResult<>();
-        result.setList(list);
+    public <T> CollectionResult<T> getResult(Collection<T> collection) {
+        CollectionResult<T> result = new CollectionResult<T>();
+        result.setCollection(collection);
         setSuccessResult(result);
         return result;
     }
-    public <T> ListResult<T> getResult(List<T> list,List<Links> links) {
-        ListResult<T> listResult = getResult(list);
-        listResult.setLinks(links);
-        return listResult;
-    }
-
-    public <T> ListResult<T> getResult(List<T> list, ResultCode resultCode) {
-        ListResult<T> result = new ListResult<>();
-        result.setList(list);
-        setSuccessResult(result, resultCode);
-        return result;
+    public <T> CollectionResult<T> getResult(Collection<T> collection,List<Links> links) {
+        CollectionResult<T> collectionResult = getResult(collection);
+        collectionResult.setLinks(links);
+        return collectionResult;
     }
 
     // 다중건 결과를 처리하는 메소드
-    public <T> SetResult<T> getResult(Set<T> set) {
-        SetResult<T> result = new SetResult<>();
-        result.setSet(set);
-        setSuccessResult(result);
-        return result;
-    }
-
-    public <T> SetResult<T> getResult(Set<T> set, ResultCode resultCode) {
-        SetResult<T> result = new SetResult<>();
-        result.setSet(set);
-        setSuccessResult(result, resultCode);
-        return result;
-    }
+//    public <T> ListResult<T> getResult(List<T> list) {
+//        ListResult<T> result = new ListResult<>();
+//        result.setList(list);
+//        setSuccessResult(result);
+//        return result;
+//    }
+//    public <T> ListResult<T> getResult(List<T> list,List<Links> links) {
+//        ListResult<T> listResult = getResult(list);
+//        listResult.setLinks(links);
+//        return listResult;
+//    }
+//
+//    public <T> ListResult<T> getResult(List<T> list, ResultCode resultCode) {
+//        ListResult<T> result = new ListResult<>();
+//        result.setList(list);
+//        setSuccessResult(result, resultCode);
+//        return result;
+//    }
+//
+//    // 다중건 결과를 처리하는 메소드
+//    public <T> SetResult<T> getResult(Set<T> set) {
+//        SetResult<T> result = new SetResult<>();
+//        result.setSet(set);
+//        setSuccessResult(result);
+//        return result;
+//    }
+//
+//    public <T> SetResult<T> getResult(Set<T> set, ResultCode resultCode) {
+//        SetResult<T> result = new SetResult<>();
+//        result.setSet(set);
+//        setSuccessResult(result, resultCode);
+//        return result;
+//    }
 
     // 실패 결과만 처리하는 메소드
     public CommonResult getFailResult(String msg) {
