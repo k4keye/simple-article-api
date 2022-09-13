@@ -1,5 +1,6 @@
 package com.simple.article.domain;
 
+import com.simple.article.domain.base.BaseStateEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TB_ARTICLE")
-public class Article {
+public class Article extends BaseStateEntity {
 
     @Id @GeneratedValue
     private Long id;
@@ -24,6 +25,11 @@ public class Article {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author")
     private Member member;
+
+    public Article(String title, String context) {
+        this.title = title;
+        this.context = context;
+    }
 
     public void setAuthor(Member member){
         this.member = member;

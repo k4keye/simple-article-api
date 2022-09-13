@@ -2,7 +2,6 @@ package com.simple.article.response;
 
 import com.simple.article.common.response.ResponseService;
 import com.simple.article.common.response.result.CollectionResult;
-import com.simple.article.common.response.result.ListResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

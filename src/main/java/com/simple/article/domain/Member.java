@@ -48,7 +48,7 @@ public class Member extends BaseStateEntity implements Serializable {
         this.authorities.add(authority);
     }
 
-    public void newArticles(Article article){
+    public void newArticle(Article article){
         if(article != null){
             getArticles().add(article);
             article.setAuthor(this);

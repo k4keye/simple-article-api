@@ -27,10 +27,13 @@ class CreateMemberTest {
 
     @Autowired
     private MemberRepository memberRepository;
-    private String loginId = "loginTest";
+    public String loginId = "loginTest";
+
     private String loginPwd = "loginPwd";
     private String nickName = "nickname";
     private String email = "email@naver.com";
+
+
     @Test
     @DisplayName("[성공] 회원가입")
     public void joinSuccess(){

@@ -13,12 +13,12 @@
 |  |  |  |  |  |
 | member | 전체 조회 | GET | /member | 완료 |
 |  | 특정 member 조회 | GET | /member/{id} | 완료 |
-|  | 수정 | PATCH | /member/{id} |  |
+|  | 수정 | PATCH | /member/{id} | 완료 |
 |  | 비활성화 | DELETE | /member/{id} | 완료 |
 |  |  |  |  |  |
 | article | 추가 | POST | /atvicle | 완료 |
-|  | 전체 조회 | GET | /atvicle |  |
-|  | 특정 article 조회 | GET | /atvicle/{id} |  |
+|  | 전체 조회 | GET | /atvicle | 완료 |
+|  | 특정 article 조회 | GET | /atvicle/{id} | 완료 |
 |  | 수정 또는 추가 | UPDATE | /atvicle/{id} |  |
 |  | 수정 | PATCH | /atvicle/{id} |  |
 |  | 비활성화 | DELETE | /atvicle/{id} |  |

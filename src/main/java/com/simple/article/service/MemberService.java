@@ -19,9 +19,9 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Member fetchMember(String id){
+    public Member fetchMember(String loginId){
         return memberRepository
-                .findByLoginID(id)
+                .findByLoginID(loginId)
                 .orElseThrow(() -> new IllegalStateException("not exist member"));
     }
     public Page<Member> fetchAllMember(Pageable pageable){
