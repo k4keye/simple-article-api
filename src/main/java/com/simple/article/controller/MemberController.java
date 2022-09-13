@@ -5,8 +5,10 @@ import com.simple.article.common.response.ResponseService;
 import com.simple.article.common.response.enums.CommonErrorCode;
 import com.simple.article.common.response.result.Links;
 import com.simple.article.common.response.result.SingleResult;
+import com.simple.article.controller.dto.request.PatchRequest;
 import com.simple.article.controller.dto.response.MemberDto;
 import com.simple.article.domain.Member;
+import com.simple.article.service.MemberPatchService;
 import com.simple.article.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,6 +29,7 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberPatchService memberPatchService;
     private final ResponseService responseService;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -70,4 +74,25 @@ public class MemberController {
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseService.getFailResult(CommonErrorCode.ACCESS_DENIAL));
     }
+
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PatchMapping("/{id}")
+    public ResponseEntity patchMember(@PathVariable String id , @RequestBody PatchRequest[] patchRequest){
+
+        Member authMember = memberService.getAuthMember();
+
+        if(authMember.isAdmin() || authMember.getLoginID().equals(id)){
+
+            Member member = memberService.fetchMember(id);
+            for (PatchRequest request : patchRequest) {
+                memberPatchService.patch(member,request.getOp(),request.getPath(),request.getValue());
+            }
+
+            return ResponseEntity.ok(responseService.getSuccessResult());
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseService.getFailResult(CommonErrorCode.ACCESS_DENIAL));
+
+    }
+
 }

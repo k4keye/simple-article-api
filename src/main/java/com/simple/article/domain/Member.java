@@ -71,4 +71,12 @@ public class Member extends BaseStateEntity implements Serializable {
 
         return first.isPresent();
     }
+
+    public void changeEmail(String newEmail){
+        this.email = newEmail;
+    }
+
+    public void changeNickName(String newNickName){
+        this.nickName = newNickName;
+    }
 }
