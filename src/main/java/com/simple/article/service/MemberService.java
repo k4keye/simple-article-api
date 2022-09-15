@@ -4,13 +4,13 @@ import com.simple.article.common.SecurityUtil;
 import com.simple.article.domain.Member;
 import com.simple.article.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,11 +19,14 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Cacheable(value = "Member", key = "#loginId")
     public Member fetchMember(String loginId){
+
         return memberRepository
                 .findByLoginID(loginId)
                 .orElseThrow(() -> new IllegalStateException("not exist member"));
     }
+
     public Page<Member> fetchAllMember(Pageable pageable){
 
         return memberRepository.findAll(pageable);

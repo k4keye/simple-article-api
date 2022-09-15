@@ -29,7 +29,8 @@ public class ArticleService {
     }
 
     public Article fetch(Long id){
-        return articleRepository.findById(id).orElseThrow(()-> new IllegalStateException("not exist article id"));
+        return articleRepository.findById(id)
+                .orElseThrow(()-> new IllegalStateException("not exist article id"));
     }
     public void update(){
 
