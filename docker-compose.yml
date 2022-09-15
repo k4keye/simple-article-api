@@ -22,3 +22,8 @@ services:
       MYSQL_DATABASE: "simple_article_db" # 초기 디비 생성
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 
+  redis:
+    container_name: simple-article-redis
+    image: redis:7.0.4
+    ports:
+      - 6379:6379
