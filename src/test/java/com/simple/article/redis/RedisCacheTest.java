@@ -3,6 +3,9 @@ package com.simple.article.redis;
 import com.simple.article.domain.Member;
 import com.simple.article.domain.repository.MemberRepository;
 import com.simple.article.service.MemberService;
+import com.simple.article.vo.Email;
+import com.simple.article.vo.LoginID;
+import com.simple.article.vo.NickName;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +38,7 @@ public class RedisCacheTest {
         int createMemberCount = 10;
 
         for ( int i = 0 ; i <createMemberCount ; i ++){
-            memberRepository.save(new Member("id"+i,"pwd"+i,"nick"+i,"email"+i));
+            memberRepository.save(new Member(new LoginID("id"+i),"pwd"+i,new NickName("nick"+i),new Email("email"+i)));
         }
 
         em.flush();

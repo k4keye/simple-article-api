@@ -1,7 +1,11 @@
 package com.simple.article.service;
 
 import com.simple.article.domain.Member;
+import com.simple.article.vo.Email;
+import com.simple.article.vo.NickName;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,34 +15,37 @@ public class MemberPatchService {
     private final MemberService memberService;
 
     @Transactional
-    public void patch(Member member, String op, String path, String value){
+    @CachePut(value = "Member", key = "#member.loginID")
+    public Member patch(Member member, String op, String path, String value){
 
         if(op.equals("replace")){
-            replaceOp(member,path,value);
+            return replaceOp(member,path,value);
         }
         if(op.equals("add")){
-            addOp(member,path,value);
+            return addOp(member,path,value);
         }
         if(op.equals("remove")){
-            removeOp(member,path,value);
+            return removeOp(member,path,value);
         }
+        return member;
     }
 
-    private void replaceOp(Member member,String path, String value){
+    private Member replaceOp(Member member,String path, String value){
         if(path.equals("email")){
-            member.changeEmail(value);
-            return;
+            member.changeEmail(new Email(value));
+            return member;
         }
 
         if(path.equals("nickName")){
-            member.changeNickName(value);
-            return;
+            member.changeNickName(new NickName(value));
+            return member;
         }
+        return member;
     }
-    private void addOp(Member member,String path, String value){
-
+    private Member addOp(Member member,String path, String value){
+        return member;
     }
-    private void removeOp(Member member,String path, String value){
-
+    private Member removeOp(Member member,String path, String value){
+        return member;
     }
 }
