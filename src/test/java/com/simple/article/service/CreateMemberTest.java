@@ -2,6 +2,9 @@ package com.simple.article.service;
 
 import com.simple.article.domain.Member;
 import com.simple.article.domain.repository.MemberRepository;
+import com.simple.article.vo.Email;
+import com.simple.article.vo.LoginID;
+import com.simple.article.vo.NickName;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,8 +40,8 @@ class CreateMemberTest {
     @Test
     @DisplayName("[성공] 회원가입")
     public void joinSuccess(){
-
-        Member saveMember = loginService.join(loginId, loginPwd, nickName, email);
+        
+        Member saveMember = loginService.join(new LoginID(loginId), loginPwd, new NickName(nickName), new Email(email));
         Assertions.assertNotNull(saveMember);
 
 

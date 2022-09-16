@@ -46,17 +46,17 @@ public class LoginService {
 
         return token;
     }
-    public Member join(String id, String pwd,String nickName, String email){
+    public Member join(LoginID id, String pwd,NickName nickName, Email email){
 
 
-        if(memberService.existLoginId(id))
+        if(memberService.existLoginId(id.getValue()))
             throw new IllegalStateException("exist member login id");
 
-        if(memberService.existNickName(new NickName(nickName)))
+        if(memberService.existNickName(nickName))
             throw new IllegalStateException("exist member nickName");
 
         String encodePwd = passwordEncoder.encode(pwd);
 
-        return memberService.saveMember(new LoginID(id),encodePwd,new NickName(nickName),new Email(email));
+        return memberService.saveMember(id,encodePwd,nickName,email);
     }
 }

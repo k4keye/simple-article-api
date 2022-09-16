@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 @Rollback
-public class FindArticleTest extends DummyArticle {
+public class FindArticleTest {
 
     @Autowired
     private ArticleService articleService;
