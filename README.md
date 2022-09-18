@@ -33,6 +33,7 @@
 - p6spy
 - swagger
 - lettuce (redis client)
+- h2
 
 
 ## setup
