@@ -32,7 +32,7 @@ class PatchMemberService extends DummyMember {
 
         String op = "replace";
         String path = "email";
-        String value ="newemail@newemail.com";
+        String value ="newemail2@newemail.com";
 
         memberPatchService.patch(fetchMember,op,path,value);
 

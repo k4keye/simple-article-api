@@ -7,6 +7,9 @@ import com.simple.article.controller.dto.request.JoinRequest;
 import com.simple.article.controller.dto.response.MemberDto;
 import com.simple.article.domain.Member;
 import com.simple.article.service.LoginService;
+import com.simple.article.vo.Email;
+import com.simple.article.vo.LoginID;
+import com.simple.article.vo.NickName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +51,7 @@ public class LoginController {
     @PostMapping("/join")
     public ResponseEntity join(@Valid @RequestBody JoinRequest joinRequest){
 
-        Member member = loginService.join(joinRequest.getId(), joinRequest.getPwd(), joinRequest.getNickName(), joinRequest.getEmail());
+        Member member = loginService.join(new LoginID(joinRequest.getId()), joinRequest.getPwd(), new NickName(joinRequest.getNickName()), new Email(joinRequest.getEmail()));
         MemberDto memberDto = new MemberDto(member);
 
         List<Links> links = new ArrayList<>();

@@ -2,6 +2,9 @@ package com.simple.article.service;
 
 import com.simple.article.config.auth.TokenProvider;
 import com.simple.article.domain.Member;
+import com.simple.article.vo.Email;
+import com.simple.article.vo.LoginID;
+import com.simple.article.vo.NickName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -43,9 +46,10 @@ public class LoginService {
 
         return token;
     }
-    public Member join(String id, String pwd,String nickName, String email){
+    public Member join(LoginID id, String pwd,NickName nickName, Email email){
 
-        if(memberService.existLoginId(id))
+
+        if(memberService.existLoginId(id.getValue()))
             throw new IllegalStateException("exist member login id");
 
         if(memberService.existNickName(nickName))

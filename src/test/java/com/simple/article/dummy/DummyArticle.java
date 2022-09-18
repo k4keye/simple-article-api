@@ -14,11 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @SpringBootTest
 @Transactional
-@Rollback
 public class DummyArticle extends DummyMember{
 
     @Autowired
@@ -29,6 +29,9 @@ public class DummyArticle extends DummyMember{
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    EntityManager em;
 
     @BeforeEach
     public void createDummyArticle(){
@@ -41,6 +44,8 @@ public class DummyArticle extends DummyMember{
 
         articleService.post(member,title,context);
 
+        em.flush();
+        em.clear();
         List<Article> all = articleRepository.findAll();
         Assertions.assertTrue(all.size()>0);
     }

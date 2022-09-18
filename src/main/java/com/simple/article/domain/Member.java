@@ -2,6 +2,9 @@ package com.simple.article.domain;
 
 
 import com.simple.article.domain.base.BaseStateEntity;
+import com.simple.article.vo.Email;
+import com.simple.article.vo.LoginID;
+import com.simple.article.vo.NickName;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,26 +22,36 @@ import java.util.*;
 @Table(name = "TB_MEMBER")
 public class Member extends BaseStateEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "login_id", unique = true)
+
+//    @Embedded
+//    @AttributeOverride(name="value", column=@Column(name="login_id", nullable = false , unique = true))
+
+    @Column(name = "login_id")
     private String loginID;
 
     @Column(name = "login_pwd")
     private String loginPWD;
 
-    @Column(name = "nick_name", unique = true)
-    private String nickName;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "nick_name", nullable = false , unique = true))
+    private NickName nickName;
 
-    @Column(name = "email")
-    private String email;
+  //  @Column(name = "email")
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "email", nullable = false))
+    private Email email;
 
     @OneToMany(mappedBy = "member")
     private List<Article> articles = new ArrayList<>();
 
-    public Member(String loginID, String loginPWD, String nickName, String email) {
-        this.loginID = loginID;
+    public Member(LoginID loginID, String loginPWD, NickName nickName, Email email) {
+        this.loginID = loginID.getValue();
         this.loginPWD = loginPWD;
         this.nickName = nickName;
         this.email = email;
@@ -53,6 +66,18 @@ public class Member extends BaseStateEntity implements Serializable {
             getArticles().add(article);
             article.setAuthor(this);
         }
+    }
+
+    public String getEmail() {
+        return email.getValue();
+    }
+
+    public String getLoginID() {
+        return loginID;
+    }
+
+    public String getNickName(){
+        return nickName.getValue();
     }
 
     @ManyToMany
@@ -72,11 +97,11 @@ public class Member extends BaseStateEntity implements Serializable {
         return first.isPresent();
     }
 
-    public void changeEmail(String newEmail){
+    public void changeEmail(Email newEmail){
         this.email = newEmail;
     }
 
-    public void changeNickName(String newNickName){
+    public void changeNickName(NickName newNickName){
         this.nickName = newNickName;
     }
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "TB_ARTICLE")
 public class Article extends BaseStateEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")

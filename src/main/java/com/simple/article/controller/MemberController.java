@@ -53,7 +53,10 @@ public class MemberController {
         Member authMember = memberService.getAuthMember();
 
         if(authMember.isAdmin() || authMember.getLoginID().equals(id)){
+            long startTime = System.currentTimeMillis();
             Member member = memberService.fetchMember(id);
+            long endTime = System.currentTimeMillis();
+            System.out.println("response cache time  = " + (endTime - startTime));
             return ResponseEntity.status(HttpStatus.CREATED).body(responseService.getResult(new MemberDto(member)));
         }
 
@@ -92,7 +95,6 @@ public class MemberController {
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseService.getFailResult(CommonErrorCode.ACCESS_DENIAL));
-
     }
 
 }
